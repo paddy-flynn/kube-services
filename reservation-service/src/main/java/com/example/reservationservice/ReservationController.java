@@ -1,6 +1,7 @@
 package com.example.reservationservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,14 @@ public class ReservationController {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Value("${temp.prop}")
+    String tempProp;
+
+    @GetMapping("/server")
+    public String serverType() {
+        return this.tempProp;
+    }
 
     @GetMapping
     public List<Reservation> reservations() {
